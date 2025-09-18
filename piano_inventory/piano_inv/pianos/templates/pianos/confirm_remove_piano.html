@@ -1,0 +1,22 @@
+{% extends "pianos/layout.html" %}
+
+{% block body %}
+    <div id="confirmation-container">
+        <h2>Confirm Removal</h2>
+        
+        <p>Are you sure you want to remove the following piano?</p>
+        
+        <div>
+            <p>Brand: {{ piano.brand }}</p>
+            <p>Finish: {{ piano.finish }}</p>
+            <p>Price: ${{ piano.price|floatformat:"2g" }}</p>
+        </div>
+        
+        <form action="{% url 'remove_piano' brand=piano.brand finish=piano.finish price=piano.price %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, remove it</button>
+        </form>
+        
+        <a href="{% url 'piano_detail' brand=piano.brand finish=piano.finish price=piano.price %}">Cancel</a>
+    </div>
+{% endblock %}

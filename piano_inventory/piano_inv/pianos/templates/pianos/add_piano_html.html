@@ -1,0 +1,23 @@
+{% extends "pianos/layout.html" %}
+{% block body %}
+
+    <div class="piano-form">
+        <h2>Add Piano (HTML)</h2>
+        <form action="{% url 'add_piano_html' %}" method="POST" class="form-container">
+            {% csrf_token %}
+            
+            <label for="brand">Brand</label>
+            <input class="form-control" type="text" name="brand">
+
+            <label for="fnish">Finish</label>
+            <input class="form-control" type="text" name="finish">
+
+            <label for="price">Price</label>
+            <input class="form-control" type="number" name="price">
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+        </form>
+    </div>
+
+{% endblock %}

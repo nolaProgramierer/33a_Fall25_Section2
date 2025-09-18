@@ -1,0 +1,43 @@
+{% extends "pianos/layout.html" %}
+{% block body %}
+
+    <div class="piano-form">
+        <h2>Add Piano (Django Form)</h2>
+
+        {# Form to add a new piano; posts to the 'add_piano' view #}
+        <form action="{% url 'add_piano' %}" method="POST" class="form-container">
+            {% csrf_token %}
+
+            {# Display any form-wide (non-field) errors #}
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {% for error in form.non_field_errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {# Loop through each field in the form #}
+            {% for field in form %}
+                {# Add a CSS class if the field has errors #}
+                <div class="form-group {% if field.errors %} has-error {% endif %}">
+
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    
+                    {# Render the form input element #}
+                    {{ field }}
+
+                    {# Display errors specific to this field #}
+                    {% for error in field.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            
+        </form>
+    </div>
+
+{% endblock %}

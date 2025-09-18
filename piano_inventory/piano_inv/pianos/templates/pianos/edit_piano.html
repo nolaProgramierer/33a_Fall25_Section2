@@ -1,0 +1,29 @@
+{% extends "pianos/layout.html" %}
+
+{% block body %}
+<div class="piano-form">
+    <h2>Edit Piano</h2>
+    <form action="{% url 'edit_piano' brand=piano.brand finish=piano.finish price=piano.price %}" class="form-container" method="POST">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        {% for field in form %}
+            <div class="form-group {% if field.errors %} has-error {% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div> 
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

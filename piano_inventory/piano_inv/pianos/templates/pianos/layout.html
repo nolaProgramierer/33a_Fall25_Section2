@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Piano inventory and management demo app">
+        <title>Pianos</title>
+        <link href="{% static 'pianos/styles.css' %}" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div id="navbar">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'add_piano_html' %}">Add Piano (HTML)</a>
+            <a href="{% url 'add_piano' %}">Add piano (Form)</a>
+        </div>
+        
+        <main id="body-block">
+            <h1 id="layout-title">Section2 Django Demo App</h1>
+            {% block body %}
+            {% endblock %}
+        </main> 
+    </body>
+</html>

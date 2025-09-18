@@ -1,0 +1,33 @@
+{% extends "pianos/layout.html" %}
+
+{% block body %}
+
+<div id="index-container">
+    <h2>Piano Inventory</h2>
+
+    {% for piano in pianos %}
+    
+        <div class="piano-card">
+            <div class="card-item">
+                <span class="item-label">Brand:</span> 
+                <a href="{% url 'piano_detail' brand=piano.brand finish=piano.finish price=piano.price %}">{{ piano.brand }}</a>
+            </div>
+            <div class="card-item">
+                <span class="item-label">Finish:</span> 
+                {{ piano.finish }}
+            </div>
+            <div class="card-item">
+                <span class="item-label">Price:</span> 
+                ${{ piano.price|floatformat:"2g" }}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+
+
+
+
